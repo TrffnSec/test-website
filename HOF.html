@@ -96,6 +96,22 @@
     <!-- End of Squarespace Headers -->
     <link rel="stylesheet" type="text/css"
         href="https://static1.squarespace.com/static/vta/5c5a519771c10ba3470d8101/versioned-assets/1763743931305-OOVTW1SRW7PUQ5UT50Y9/static.css">
+
+<script>
+document.querySelectorAll('.cert-card').forEach(card => {
+    card.addEventListener('click', () => {
+        // Remove active state from others
+        document.querySelectorAll('.cert-card').forEach(c => {
+            if (c !== card) c.classList.remove('active');
+        });
+
+        // Toggle active state on clicked card
+        card.classList.toggle('active');
+    });
+});
+</script>
+
+
 </head>
 
 <body id="collection-662acc56a8de08455fd4f713" class="
@@ -1618,16 +1634,11 @@
 
                 /* Mobile Responsive */
 @media (max-width: 900px) {
-    .gallery-container {
-        height: auto;
-        padding: 2rem 0;
-        perspective: none;
-    }
 
-    /* FIX: prevent dim images on mobile */
-    .cert-image img {
-        opacity: 1 !important;
-        filter: none !important;
+    /* Brighten only when tapped (active) */
+    .cert-card.active .cert-image img {
+        opacity: 1;
+        filter: grayscale(0%) contrast(1);
     }
 
     .gallery-wrapper {
@@ -1656,6 +1667,7 @@
         font-size: 2.5rem;
     }
 }
+
 
             </style>
 
