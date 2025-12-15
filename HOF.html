@@ -1617,39 +1617,46 @@
 
 
                 /* Mobile Responsive */
-                @media (max-width: 900px) {
-                    .gallery-container {
-                        height: auto;
-                        padding: 2rem 0;
-                        perspective: none;
-                    }
+@media (max-width: 900px) {
+    .gallery-container {
+        height: auto;
+        padding: 2rem 0;
+        perspective: none;
+    }
 
-                    .gallery-wrapper {
-                        width: 100%;
-                        height: auto;
-                        display: flex;
-                        flex-direction: column;
-                        gap: 2rem;
-                        align-items: center;
-                        transform: none !important;
-                    }
+    /* FIX: prevent dim images on mobile */
+    .cert-image img {
+        opacity: 1 !important;
+        filter: none !important;
+    }
 
-                    .cert-card {
-                        position: relative;
-                        transform: none !important;
-                        margin: 0;
-                        width: 90%;
-                        max-width: 340px;
-                    }
+    .gallery-wrapper {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+        transform: none !important;
+    }
 
-                    .gallery-wrapper.expanded .cert-card {
-                        transform: none !important;
-                    }
+    .cert-card {
+        position: relative;
+        transform: none !important;
+        margin: 0;
+        width: 90%;
+        max-width: 340px;
+    }
 
-                    .hof-title {
-                        font-size: 2.5rem;
-                    }
-                }
+    .gallery-wrapper.expanded .cert-card {
+        transform: none !important;
+    }
+
+    .hof-title {
+        font-size: 2.5rem;
+    }
+}
+
             </style>
 
             <section class="hall-of-fame-section">
