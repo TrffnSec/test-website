@@ -1475,6 +1475,7 @@
                     border-color: var(--hof-accent);
                     box-shadow: 0 0 20px var(--hof-accent-glow);
                 }
+                
 
                 /* Holographic image container */
                 .cert-image {
@@ -1553,32 +1554,33 @@
                 .cert-card:nth-child(1) {
                     transform: translate3d(-30px, -30px, -100px) rotate(-5deg);
                     z-index: 1;
-                    opacity: 0.6;
+                    opacity: 1;
                 }
 
                 .cert-card:nth-child(2) {
                     transform: translate3d(-15px, -15px, -50px) rotate(-2.5deg);
                     z-index: 2;
-                    opacity: 0.8;
+                    opacity: 1;
                 }
 
                 .cert-card:nth-child(3) {
                     transform: translate3d(0, 0, 0) rotate(0deg);
                     z-index: 3;
                     opacity: 1;
+                    pointer-events: auto;
                     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
                 }
 
                 .cert-card:nth-child(4) {
                     transform: translate3d(15px, 15px, -50px) rotate(2.5deg);
                     z-index: 2;
-                    opacity: 0.8;
+                    opacity: 1;
                 }
 
                 .cert-card:nth-child(5) {
                     transform: translate3d(30px, 30px, -100px) rotate(5deg);
                     z-index: 1;
-                    opacity: 0.6;
+                    opacity: 1;
                 }
 
                 /* Focus Mode Styles */
@@ -1633,45 +1635,61 @@
 
 
                 /* Mobile Responsive */
-@media (max-width: 900px) {
-    .gallery-container {
-        height: auto;
-        padding: 2rem 0;
-        perspective: none;
-    }
 
-    /* FIX: prevent dim images on mobile */
-    .cert-image img {
-        opacity: 1 !important;
-        filter: none !important;
-    }
+                @media (max-width: 900px) {
 
-    .gallery-wrapper {
-        width: 100%;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-        align-items: center;
-        transform: none !important;
-    }
+                    .gallery-container {
+                        height: auto;
+                        padding: 2rem 0;
+                        perspective: none;
+                    }
 
-    .cert-card {
-        position: relative;
-        transform: none !important;
-        margin: 0;
-        width: 90%;
-        max-width: 340px;
-    }
+                    /* Prevent dim images by default */
+                    .cert-image img {
+                        opacity: 1 !important;
+                        filter: none !important;
+                        transition: filter 0.3s ease, opacity 0.3s ease;
+                    }
 
-    .gallery-wrapper.expanded .cert-card {
-        transform: none !important;
-    }
+                    /* Active (tap) state */
+                    .cert-card.active .cert-image img {
+                        filter: brightness(1.15) contrast(1.05);
+                    }
 
-    .hof-title {
-        font-size: 2.5rem;
-    }
-}
+                    /* Optional glow when active */
+                    .cert-card.active {
+                        box-shadow:
+                            0 0 30px rgba(0, 243, 255, 0.4),
+                            0 10px 30px rgba(0, 0, 0, 0.6);
+                        border-color: var(--hof-accent);
+                    }
+
+                    .gallery-wrapper {
+                        width: 100%;
+                        height: auto;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 2rem;
+                        align-items: center;
+                        transform: none !important;
+                    }
+
+                    .cert-card {
+                        position: relative;
+                        transform: none !important;
+                        margin: 0;
+                        width: 90%;
+                        max-width: 340px;
+                    }
+
+                    .gallery-wrapper.expanded .cert-card {
+                        transform: none !important;
+                    }
+
+                    .hof-title {
+                        font-size: 2.5rem;
+                    }
+                }
 
             </style>
 
@@ -2048,6 +2066,18 @@
 
 
     </div>
+<script>
+document.querySelectorAll('.cert-card').forEach(card => {
+    card.addEventListener('click', () => {
+        // remove active from others
+        document.querySelectorAll('.cert-card.active')
+            .forEach(c => c.classList.remove('active'));
+
+        // activate clicked card
+        card.classList.add('active');
+    });
+});
+</script>
 
     <script defer="true"
         src="https://static1.squarespace.com/static/vta/5c5a519771c10ba3470d8101/scripts/site-bundle.17f59db7cf34d0cdaeae8d9282f3c9a3.js"
