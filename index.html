@@ -473,6 +473,18 @@
             height: 50px;
             fill: currentColor;
           }
+
+          /* Force rounded Squarespace buttons */
+          .sqs-button-element,
+          .sqs-button-element--primary,
+          .sqs-block-button-element {
+            border-radius: 999px !important; /* pill style */
+            padding: 14px 28px !important;
+            background-color: #000 !important; /* change color if needed */
+            color: #fff !important;
+          }
+
+          
         </style>
         <div class="header-border" data-header-style="dynamic" data-header-border="false" data-test="header-border"
           style="
